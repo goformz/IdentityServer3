@@ -65,7 +65,7 @@ namespace IdentityServer3.Core.Validation
                 {
                     if (id.Length > _options.InputLengthRestrictions.ClientId)
                     {
-                        Logger.Error("Client ID or secret exceeds maximum lenght.");
+                        Logger.Error("Client ID or secret exceeds maximum length.");
                         return null;
                     }
 
