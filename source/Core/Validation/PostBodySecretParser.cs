@@ -42,49 +42,6 @@ namespace IdentityServer3.Core.Validation
             _options = options;
         }
 
-        ///// <summary>
-        ///// Tries to find a secret on the environment that can be used for authentication
-        ///// </summary>
-        ///// <param name="environment">The environment.</param>
-        ///// <returns>
-        ///// A parsed secret
-        ///// </returns>
-        //public async Task<ParsedSecret> ParseAsync(IDictionary<string, object> environment)
-        //{
-        //    Logger.Debug("Start parsing for secret in post body");
-
-        //    var context = new OwinContext(environment);
-        //    var body = await context.ReadRequestFormAsync();
-
-        //    if (body != null)
-        //    {
-        //        var id = body.Get("client_id");
-        //        var secret = body.Get("client_secret");
-
-        //        if (id.IsPresent() && secret.IsPresent())
-        //        {
-        //            if (id.Length > _options.InputLengthRestrictions.ClientId ||
-        //                secret.Length > _options.InputLengthRestrictions.ClientSecret)
-        //            {
-        //                Logger.Debug("Client ID or secret exceeds maximum lenght.");
-        //                return null;
-        //            }
-
-        //            var parsedSecret = new ParsedSecret
-        //            {
-        //                Id = id,
-        //                Credential = secret,
-        //                Type = Constants.ParsedSecretTypes.SharedSecret
-        //            };
-
-        //            return parsedSecret;
-        //        }
-        //    }
-
-        //    Logger.Debug("No secret in post body found");
-        //    return null;
-        //}
-
         /// <summary>
         /// Tries to find a secret on the environment that can be used for authentication
         /// </summary>
