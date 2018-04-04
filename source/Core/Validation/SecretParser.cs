@@ -20,20 +20,30 @@ namespace IdentityServer3.Core.Validation
         public async Task<ParsedSecret> ParseAsync(IDictionary<string, object> environment)
         {
             // see if a registered parser finds a secret on the request
-            ParsedSecret parsedSecret = null;
+            ParsedSecret bestSecret = null;
             foreach (var parser in _parsers)
             {
-                parsedSecret = await parser.ParseAsync(environment);
+                var parsedSecret = await parser.ParseAsync(environment);
                 if (parsedSecret != null)
                 {
-                    Logger.DebugFormat("Parser found secret: {0}", parser.GetType().Name);
-                    Logger.InfoFormat("Secret id found: {0}", parsedSecret.Id);
+                    Logger.DebugFormat("Parser found secret: {type}", parser.GetType().Name);
 
-                    return parsedSecret;
+                    bestSecret = parsedSecret;
+
+                    if (parsedSecret.Type != Constants.ParsedSecretTypes.NoSecret)
+                    {
+                        break;
+                    }
                 }
             }
 
-            Logger.InfoFormat("Parser found no secret");
+            if (bestSecret != null)
+            {
+                Logger.DebugFormat("Secret id found: {id}", bestSecret.Id);
+                return bestSecret;
+            }
+
+            Logger.DebugFormat("Parser found no secret");
             return null;
         }
     }
