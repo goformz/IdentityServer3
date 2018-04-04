@@ -40,6 +40,22 @@ namespace IdentityServer3.Core.Models
         public List<Secret> ClientSecrets { get; set; }
 
         /// <summary>
+        /// If set to false, no client secret is needed to request tokens at the token endpoint (defaults to <c>true</c>)
+        /// </summary>
+        private bool _requireClientSecret = true;
+        public bool RequireClientSecret
+        {
+            get
+            {
+                return _requireClientSecret;
+            }
+            set
+            {
+                _requireClientSecret = value;
+            }
+        }
+
+        /// <summary>
         /// Client display name (used for logging and consent screen)
         /// </summary>
         public string ClientName { get; set; }
